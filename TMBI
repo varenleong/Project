@@ -1,0 +1,38 @@
+import random
+import string
+ 
+class Blockchain:
+    def __init__(self):
+        self.chain = {}
+ 
+    def generate_blockchain_code(self):
+        return ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+ 
+    def add_block(self, name, contact_number, email, home_address):
+        blockchain_code = self.generate_blockchain_code()
+        self.chain[blockchain_code] = {
+            'Name': name,
+            'Contact Number': contact_number,
+            'Email': email,
+            'Home Address': home_address
+        }
+        return blockchain_code
+ 
+    def get_details(self, blockchain_code):
+        return self.chain.get(blockchain_code, "Blockchain code not found.")
+ 
+# Example usage:
+blockchain = Blockchain()
+ 
+name = input("Enter Name: ")
+contact_number = input("Enter Contact Number: ")
+email = input("Enter Email Address: ")
+home_address = input("Enter Home Address: ")
+ 
+blockchain_code = blockchain.add_block(name, contact_number, email, home_address)
+print(f"Blockchain Code: {blockchain_code}")
+ 
+# Retrieve details using the blockchain code
+search_code = input("Enter Blockchain Code to retrieve details: ")
+details = blockchain.get_details(search_code)
+print(details)
